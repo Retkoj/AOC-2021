@@ -2,7 +2,7 @@
 
 ## Run code
 
-`python ./src/day_[1].py ./data/[input_day_1].txt`
+`python ./src/day_[x].py [path/to/input_day_x].txt`
 
 ## System
 - Windows 10
