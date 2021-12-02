@@ -1,5 +1,6 @@
-setwd("C:\\Users\\j_ka_\\PycharmProjects\\AOC_2021")
-data = read.table("data\\day_1.txt", header=FALSE)
+library(here)
+
+data <- read.table(here("data", "day_1.txt"), header=FALSE)
 
 
 ## PART 1
