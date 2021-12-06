@@ -6,6 +6,7 @@ import tqdm as tqdm
 
 
 def procreate(fish_list):
+    """List solution, see day_6_2 for scalable dict solution"""
     tmp_list = copy.deepcopy(fish_list)
     for i, fish in enumerate(fish_list):
         if fish == 0:
