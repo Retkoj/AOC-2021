@@ -33,6 +33,10 @@ class BingoBoard:
                 pass
 
     def sum_unmarked(self):
+        """
+        Calculate te sum of all numbers that haven't been crossed off
+        :return: int
+        """
         summed_unmarked = 0
         for i in range(0, self.board_width):
             for j in range(0, self.board_width):
@@ -41,6 +45,10 @@ class BingoBoard:
         return summed_unmarked
 
     def check_win(self):
+        """
+        Check whether there is a horizontal or vertical winning line
+        Sets the 'won' parameter to True
+        """
         self.check_horizontal_win()
         self.check_vertical_win()
 
@@ -59,6 +67,10 @@ class BingoBoard:
 
 
 class BingoSubsystem:
+    """
+    The submarine has a bingo subsystem to help passengers (currently, you and the giant squid) pass the time. It
+    automatically generates a random order in which to draw numbers and a random set of boards (your puzzle input).
+    """
     def __init__(self, called_numbers):
         self.winning_number = None
         self.boards: dict[int: BingoBoard] = {}
@@ -71,6 +83,16 @@ class BingoSubsystem:
         self.n_boards += 1
 
     def play_game(self):
+        """
+        Goes trough all boards, crossing off the called numbers per board. After one board wins, the score of the
+        winning board can be calculated. Start by finding the sum of all unmarked numbers on that
+        board. Then, multiply that sum by the number that was just called when the board
+        won to get the final score.
+
+        The board id number, the winning number (last called), the unmarked sum and the product of the unmarked sum
+        and last called number are printed to the commandline.
+        :return:
+        """
         for number in self.called_numbers:
             for i, board in self.boards.items():
                 board.cross_off_number(number)
@@ -81,10 +103,12 @@ class BingoSubsystem:
                     print(f"sum unmarked: {board.sum_unmarked()}, output: {board.sum_unmarked() * number}")
                     break
             if self.winning_board is not None:
-
                 break
 
     def print_boards(self):
+        """
+        Print all boards in the system
+        """
         for i, board in self.boards.items():
             print(f"Board {i}:")
             board.print_board()
@@ -92,14 +116,15 @@ class BingoSubsystem:
 
 def process(input_list: List) -> int:
     """
-
+    Parses the list of called numbers and the boards into a BingoSubsystem and calls print_boards and play_game
+    on the subsystem.
     :param input_list:
     :return:
     """
     total = 0
     called_numbers = input_list[0].split(',')
     bingo_subsystem = BingoSubsystem(called_numbers)
-    input_list.append('')
+    input_list.append('')  # Hack-y way to parse the final board
     board = BingoBoard()
     for line in input_list[2:]:
         if line != '':

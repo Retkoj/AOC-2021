@@ -1,61 +1,7 @@
 import fileinput
 from typing import List
 
-
-class BingoBoard:
-    def __init__(self):
-        self.won = False
-        self.board = []
-        self.board_width = None
-        self.crossed_off_board = []
-
-    def build_board(self, line):
-        self.board.append([int(n) for n in line.split()])
-        if self.board_width is None:
-            self.board_width = len(line.split())
-        self.crossed_off_board.append([0] * len(line.split()))
-
-    def print_board(self):
-        for line in self.board:
-            print(line)
-
-    def print_crossed_off_board(self):
-        for line in self.crossed_off_board:
-            print(line)
-
-    def cross_off_number(self, number):
-        for i, line in enumerate(self.board):
-            try:
-                index_of_number = line.index(number)
-                self.crossed_off_board[i][index_of_number] = 1
-                self.check_win()
-            except ValueError:
-                pass
-
-    def sum_unmarked(self):
-        summed_unmarked = 0
-        for i in range(0, self.board_width):
-            for j in range(0, self.board_width):
-                if self.crossed_off_board[i][j] == 0:
-                    summed_unmarked += self.board[i][j]
-        return summed_unmarked
-
-    def check_win(self):
-        self.check_horizontal_win()
-        self.check_vertical_win()
-
-    def check_horizontal_win(self):
-        win = any([sum(line) == self.board_width for line in self.crossed_off_board])
-        if win:
-            self.won = True
-
-    def check_vertical_win(self):
-        win = False
-        for i in range(0, self.board_width):
-            if self.board_width == sum([line[i] for line in self.crossed_off_board]):
-                win = True
-        if win:
-            self.won = True
+from src.day_4 import BingoBoard
 
 
 class BingoSubsystem:
@@ -71,6 +17,11 @@ class BingoSubsystem:
         self.n_boards += 1
 
     def play_game(self):
+        """
+
+        Second part challenge: Figure out which board will win last. Once it wins, what would its final score be?
+        :return:
+        """
         n_winning_boards = 0
         for number in self.called_numbers:
             for i, board in self.boards.items():
@@ -98,7 +49,7 @@ def process(input_list: List) -> int:
     total = 0
     called_numbers = input_list[0].split(',')
     bingo_subsystem = BingoSubsystem(called_numbers)
-    input_list.append('')
+    input_list.append('')  # Hack-y way to parse the final board
     board = BingoBoard()
     for line in input_list[2:]:
         if line != '':
