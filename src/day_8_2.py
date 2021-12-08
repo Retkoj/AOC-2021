@@ -2,20 +2,6 @@ import fileinput
 from typing import List
 
 
-LETTERS = {
-0: 'cagedb',
-    1: 'ab',
-    2: 'gcdfa',
-    3: 'fbcad',
-    4: 'eafb',
-    5: 'cdfbe',
-    6: 'cdfgeb',
-    7: 'dab',
-    8: 'acedgfb',
-    9: 'cefabd'
-}
-
-
 def contains_letters(number_in_letters, mapping):
     """
     Map a lettercode to a number
@@ -69,7 +55,7 @@ def process(input_list: List) -> int:
     - Sum the output numbers together
 
     :param input_list: e.g. acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf
-    :return:
+    :return: integer, sum of all outputs
     """
     total = 0
     for line in input_list:

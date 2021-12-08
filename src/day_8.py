@@ -4,9 +4,13 @@ from typing import List
 
 def process(input_list: List) -> int:
     """
+    Because the digits 1, 4, 7, and 8 each use a unique number of segments, you should be able to tell which
+    combinations of signals correspond to those digits. Counting only digits in the output values (the part after | on
+    each line).
 
-    :param input_list:
-    :return:
+    In the output values, how many times do digits 1, 4, 7, or 8 appear?
+    :param input_list: e.g. acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf
+    :return: integer, how many times the digits 1, 4, 7, or 8 appear
     """
     total = 0
     for line in input_list:
