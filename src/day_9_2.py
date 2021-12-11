@@ -73,7 +73,6 @@ class HeightMap:
             plt.matshow(self.print_map, cmap='inferno')
             plt.savefig(f'.\images\plot_{idx}')
             plt.close()
-            index += basin
 
     def find_low_points(self):
         for x in range(0, self.length_max):
